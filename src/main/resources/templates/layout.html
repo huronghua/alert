@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head th:fragment="htmlhead">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}" />
+    <link rel="stylesheet" th:href="@{/css/app.css}" />
+    <link rel="stylesheet" th:href="@{/css/bootstrap-responsive.css}" />
+    <link rel="stylesheet" th:href="@{/css/ui-lightness/jquery-ui-1.10.4.custom.min.css}" />
+    <style type="text/css">
+        body {
+            padding-top: 85px;
+            padding-bottom: 40px;
+        }
+        .bodyOut{
+            padding-top: 85px;
+            padding-bottom: 0px;
+        }
+        .table {
+            word-break: break-all;
+        }
+        .nyroModalCont iframe {
+            width: 920px;
+            height: 600px;
+        }
+    </style>
+</head>
+<body class="layout-fixed" style="padding-top: 0px;">
+   <div th:fragment="navbar" class="wrapper" role="navigation">
+      <div th:replace="fragments/top :: top">Top</div>
+      <div layout:fragment="content" id="content"></div>
+      <div th:replace="fragments/footer :: footer">footer</div>
+   </div>
+</body>
+<script th:src="@{/js/common.js}"></script>
+<script th:src="@{/js/jquery-3.2.1.min.js}"></script>
+<script th:src="@{/js/popper.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/report-common.js}"></script>
+<script th:src="@{/js/bootstrap-select.min.js}"></script>
+<script th:src="@{/js/defaults-zh_CN.min.js}"></script>
+<script th:src="@{/js/bootstrap-datetimepicker.min.js}"></script>
+<script th:src="@{/js/bootstrap-datetimepicker.zh-CN.js}"></script>
+<script th:src="@{/js/tool.js}"></script>
+<script type="text/javascript">
+
+    var statusParms="dialogHeight: 600px; dialogWidth: 1000px;center: yes; help: no;resizable: yes; status: no;"
+    function templateSelect(element) {
+        var orgValue = jQuery(element).val();
+        var prevReturnValue = window.returnValue;
+        var returnValue = window.showModalDialog(templateUrl + "?templateId=" + orgValue, "_blank", statusParms);
+        if (returnValue == undefined) {
+            returnValue = window.returnValue;
+        }
+        if (returnValue == undefined) {
+            returnValue = '';
+        }
+        window.returnValue = prevReturnValue;
+        if (returnValue != '') {
+            jQuery(element).val(returnValue);
+        }
+    }
+
+    function dataSourceSelect(element) {
+        var orgValue = jQuery(element).val();
+        var prevReturnValue = window.returnValue;
+        var returnValue = window.showModalDialog(dataSourceUrl + "?datasourceCode=" + orgValue, "_blank", statusParms);
+        if (returnValue == undefined) {
+            returnValue = window.returnValue;
+        }
+        if (returnValue == undefined) {
+            returnValue = '';
+        }
+        window.returnValue = prevReturnValue;
+        if (returnValue != '') {
+            jQuery(element).val(returnValue);
+        }
+    }
+</script>
+</html>

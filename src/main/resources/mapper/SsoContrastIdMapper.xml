@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.banmatrip.alert.dao.SsoContrastIdMapper" >
+  <resultMap id="BaseResultMap" type="com.banmatrip.alert.domain.SsoContrastId" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="contrast_id" property="contrastId" jdbcType="INTEGER" />
+    <result column="contrast_account" property="contrastAccount" jdbcType="VARCHAR" />
+    <result column="contrast_name" property="contrastName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_id, contrast_id, contrast_account, contrast_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sso_contrast_id
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sso_contrast_id
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.banmatrip.alert.domain.SsoContrastId" >
+    insert into sso_contrast_id (id, user_id, contrast_id, 
+      contrast_account, contrast_name)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{contrastId,jdbcType=INTEGER}, 
+      #{contrastAccount,jdbcType=VARCHAR}, #{contrastName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.banmatrip.alert.domain.SsoContrastId" >
+    insert into sso_contrast_id
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="contrastId != null" >
+        contrast_id,
+      </if>
+      <if test="contrastAccount != null" >
+        contrast_account,
+      </if>
+      <if test="contrastName != null" >
+        contrast_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="contrastId != null" >
+        #{contrastId,jdbcType=INTEGER},
+      </if>
+      <if test="contrastAccount != null" >
+        #{contrastAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="contrastName != null" >
+        #{contrastName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.banmatrip.alert.domain.SsoContrastId" >
+    update sso_contrast_id
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="contrastId != null" >
+        contrast_id = #{contrastId,jdbcType=INTEGER},
+      </if>
+      <if test="contrastAccount != null" >
+        contrast_account = #{contrastAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="contrastName != null" >
+        contrast_name = #{contrastName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.banmatrip.alert.domain.SsoContrastId" >
+    update sso_contrast_id
+    set user_id = #{userId,jdbcType=INTEGER},
+      contrast_id = #{contrastId,jdbcType=INTEGER},
+      contrast_account = #{contrastAccount,jdbcType=VARCHAR},
+      contrast_name = #{contrastName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="transformIdToOrangeUserId" resultType="java.lang.Integer">
+    SELECT
+	contrast_id
+    FROM
+	sso_contrast_id
+    WHERE
+	user_id = #{userId}
+  </select>
+</mapper>

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.banmatrip.alert.dao.TaskSchedulejobMapper" >
+  <resultMap id="BaseResultMap" type="com.banmatrip.alert.domain.TaskSchedulejob" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="JOB_NAME" property="jobName" jdbcType="VARCHAR" />
+    <result column="JOB_STATUS" property="jobStatus" jdbcType="CHAR" />
+    <result column="CRON_EXPRESSION" property="cronExpression" jdbcType="VARCHAR" />
+    <result column="CONCURRENT" property="concurrent" jdbcType="CHAR" />
+    <result column="DESCRIPTION" property="description" jdbcType="VARCHAR" />
+    <result column="JOB_GROUP" property="jobGroup" jdbcType="VARCHAR" />
+    <result column="TARGET_OBJECT" property="targetObject" jdbcType="VARCHAR" />
+    <result column="TARGET_METHOD" property="targetMethod" jdbcType="VARCHAR" />
+    <result column="IS_SPRING_BEAN" property="isSpringBean" jdbcType="CHAR" />
+    <result column="CLAZZ" property="clazz" jdbcType="VARCHAR" />
+    <result column="CHILD_JOBS" property="childJobs" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, JOB_NAME, JOB_STATUS, CRON_EXPRESSION, CONCURRENT, DESCRIPTION, JOB_GROUP, TARGET_OBJECT, 
+    TARGET_METHOD, IS_SPRING_BEAN, CLAZZ, CHILD_JOBS
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from task_schedulejob
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from task_schedulejob
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.banmatrip.alert.domain.TaskSchedulejob" >
+    insert into task_schedulejob (ID, JOB_NAME, JOB_STATUS, 
+      CRON_EXPRESSION, CONCURRENT, DESCRIPTION, 
+      JOB_GROUP, TARGET_OBJECT, TARGET_METHOD, 
+      IS_SPRING_BEAN, CLAZZ, CHILD_JOBS
+      )
+    values (#{id,jdbcType=INTEGER}, #{jobName,jdbcType=VARCHAR}, #{jobStatus,jdbcType=CHAR}, 
+      #{cronExpression,jdbcType=VARCHAR}, #{concurrent,jdbcType=CHAR}, #{description,jdbcType=VARCHAR}, 
+      #{jobGroup,jdbcType=VARCHAR}, #{targetObject,jdbcType=VARCHAR}, #{targetMethod,jdbcType=VARCHAR}, 
+      #{isSpringBean,jdbcType=CHAR}, #{clazz,jdbcType=VARCHAR}, #{childJobs,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.banmatrip.alert.domain.TaskSchedulejob" >
+    insert into task_schedulejob
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="jobName != null" >
+        JOB_NAME,
+      </if>
+      <if test="jobStatus != null" >
+        JOB_STATUS,
+      </if>
+      <if test="cronExpression != null" >
+        CRON_EXPRESSION,
+      </if>
+      <if test="concurrent != null" >
+        CONCURRENT,
+      </if>
+      <if test="description != null" >
+        DESCRIPTION,
+      </if>
+      <if test="jobGroup != null" >
+        JOB_GROUP,
+      </if>
+      <if test="targetObject != null" >
+        TARGET_OBJECT,
+      </if>
+      <if test="targetMethod != null" >
+        TARGET_METHOD,
+      </if>
+      <if test="isSpringBean != null" >
+        IS_SPRING_BEAN,
+      </if>
+      <if test="clazz != null" >
+        CLAZZ,
+      </if>
+      <if test="childJobs != null" >
+        CHILD_JOBS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="jobName != null" >
+        #{jobName,jdbcType=VARCHAR},
+      </if>
+      <if test="jobStatus != null" >
+        #{jobStatus,jdbcType=CHAR},
+      </if>
+      <if test="cronExpression != null" >
+        #{cronExpression,jdbcType=VARCHAR},
+      </if>
+      <if test="concurrent != null" >
+        #{concurrent,jdbcType=CHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="jobGroup != null" >
+        #{jobGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="targetObject != null" >
+        #{targetObject,jdbcType=VARCHAR},
+      </if>
+      <if test="targetMethod != null" >
+        #{targetMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="isSpringBean != null" >
+        #{isSpringBean,jdbcType=CHAR},
+      </if>
+      <if test="clazz != null" >
+        #{clazz,jdbcType=VARCHAR},
+      </if>
+      <if test="childJobs != null" >
+        #{childJobs,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.banmatrip.alert.domain.TaskSchedulejob" >
+    update task_schedulejob
+    <set >
+      <if test="jobName != null" >
+        JOB_NAME = #{jobName,jdbcType=VARCHAR},
+      </if>
+      <if test="jobStatus != null" >
+        JOB_STATUS = #{jobStatus,jdbcType=CHAR},
+      </if>
+      <if test="cronExpression != null" >
+        CRON_EXPRESSION = #{cronExpression,jdbcType=VARCHAR},
+      </if>
+      <if test="concurrent != null" >
+        CONCURRENT = #{concurrent,jdbcType=CHAR},
+      </if>
+      <if test="description != null" >
+        DESCRIPTION = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="jobGroup != null" >
+        JOB_GROUP = #{jobGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="targetObject != null" >
+        TARGET_OBJECT = #{targetObject,jdbcType=VARCHAR},
+      </if>
+      <if test="targetMethod != null" >
+        TARGET_METHOD = #{targetMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="isSpringBean != null" >
+        IS_SPRING_BEAN = #{isSpringBean,jdbcType=CHAR},
+      </if>
+      <if test="clazz != null" >
+        CLAZZ = #{clazz,jdbcType=VARCHAR},
+      </if>
+      <if test="childJobs != null" >
+        CHILD_JOBS = #{childJobs,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.banmatrip.alert.domain.TaskSchedulejob" >
+    update task_schedulejob
+    set JOB_NAME = #{jobName,jdbcType=VARCHAR},
+      JOB_STATUS = #{jobStatus,jdbcType=CHAR},
+      CRON_EXPRESSION = #{cronExpression,jdbcType=VARCHAR},
+      CONCURRENT = #{concurrent,jdbcType=CHAR},
+      DESCRIPTION = #{description,jdbcType=VARCHAR},
+      JOB_GROUP = #{jobGroup,jdbcType=VARCHAR},
+      TARGET_OBJECT = #{targetObject,jdbcType=VARCHAR},
+      TARGET_METHOD = #{targetMethod,jdbcType=VARCHAR},
+      IS_SPRING_BEAN = #{isSpringBean,jdbcType=CHAR},
+      CLAZZ = #{clazz,jdbcType=VARCHAR},
+      CHILD_JOBS = #{childJobs,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<body>
+  <footer th:fragment="footer">
+      <p align="center" >
+          <span>&copy; 2016 - 2017</span>
+          <span>斑马旅游 专注品质出境游</span><br/>
+          <span id="nowTime"></span>
+      </p>
+      <script type="text/javascript" th:inline="javascript">
+          function current(){
+              var d=new Date(),str='';
+              str +=d.getFullYear()+'年'; //获取当前年份
+              str +=d.getMonth()+1+'月'; //获取当前月份（0——11）
+              str +=d.getDate()+'日';
+              str +=d.getHours()+'时';
+              str +=d.getMinutes()+'分';
+              str +=d.getSeconds()+'秒';
+              return str;
+          }
+          setInterval(function(){
+              $("#nowTime").html(current)},1000);
+      </script>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:include="layout :: htmlhead"></head>
+<header th:replace="fragments/top :: top"></header>
+<link rel="stylesheet" th:href="@{/css/bootstrap.css}" />
+<link rel="stylesheet" th:href="@{/css/app.css}" />
+<link rel="stylesheet" th:href="@{/css/bootstrap-multiselect.css}"  />
+<link rel="stylesheet" th:href="@{/css/bootstrap-responsive.css}" />
+<link rel="stylesheet" th:href="@{/css/layer.css}" />
+<link rel="stylesheet" th:href="@{/css/ui-lightness/jquery-ui-1.10.4.custom.min.css}" />
+<link rel="stylesheet" th:href="@{/css/zTreeStyle1/zTreeStyle.css}" />
+<style>
+    #signupForm h4 {
+        border-left: 10px solid #ccc;
+        padding-left: 10px;
+    }
+    #AlertOverHigh,#AlertAbnormal{
+        top: 10%;
+        right: 5%;
+        left: unset;
+    }
+</style>
+<body>
+<table>
+    <tbody>
+        <h1 style="font-weight: inherit; border-left: 10px solid #ccc; padding-left: 10px;">预警设置</h1>
+        <h4><img style="width: 28px; height: 28px;margin-bottom: 24px;"  src="../img/info.svg" alt=""/>预警设置功能仅针对私家团、散拼团、跟团游等标品生效。</h4>
+        <input id="dynamic_cost_over_high_configId" type="hidden"/>
+        <input id="order_cost_abnormal_configId" type="hidden"/>
+        <div style="overflow: hidden;" class="row">
+            <div th:each="destination : ${tagList}" class="span2" style="margin-bottom: 10px;">
+                <input class="btn btn-primary" style="width: 150px;" type="button" th:id="${destination.id}" name="" onclick="alertConfig(this)" th:value="${destination.name} + '预警设置'"/>
+            </div>
+        </div>
+    </tbody>
+</table>
+<div class="ibox-content" id="config_detail" hidden="true">
+    <form class="form-horizontal m-t" id="signupForm" th:action="@{/alertConfigSave}" method="post" style="margin: 20px;">
+        <div>
+            <p> <h4>动态成本过高预警设置</h4></p>
+            <br/>
+            <p>1.当动态成本超出预估成本金额 <input style="width: 30px" type="text" id="over_cost_1" value="5" name="over_cost_1" onkeyup="checkData(this)" required="true"/>%，发送提醒至负责该订单的产品经理。</p>
+            <p>2.当动态成本超出预估成本金额 <input style="width: 30px" type="text" id="over_cost_2" value="10" name="over_cost_2" onkeyup="checkData(this)" required="true"/>%，发送提醒至
+                <input style="width: 150px" type="text" id="contact_input_overhigh" readonly="true" placeholder="请选择被提醒人"/>
+            </p>
+            <p>3.当动态成本超出预估成本金额 <input style="width: 30px" type="text" id="over_cost_3" value="15" name="over_cost_3" onkeyup="checkData(this)" required="true"/>%，发送提醒至顾大鹏。</p>
+        </div>
+        <div>
+            <h4>动态成本过低预警设置</h4>
+            <br/>
+            <p>1.当动态成本低于预估成本金额 <input style="width: 30px" type="text" id="lower_cost_1" value="5" name="lower_cost_1" onkeyup="checkData(this)" required="true"/>%，发送提醒至负责该订单的产品经理。</p>
+        </div>
+        <div>
+            <h4>订单成本异常预警设置</h4>
+            <br/>
+            <p>1.当需求单中的最终金额大于等于渠道待结算价，发送提醒至负责该订单的产品经理以及
+                <input style="width: 150px" type="text" id="contact_input_abnormal" readonly="true" placeholder="请选择被提醒人"/>
+            </p>
+        </div>
+        <div>
+            <h4>预警时间节点设置</h4>
+            <br/>
+            <p>1.距离订单出发前
+                <select style="width: 8%" name="time_point_before" id="time_point_before" required="true">
+                    <option value="5">5天</option>
+                    <option value="6">6天</option>
+                    <option value="7" selected="selected">7天</option>
+                </select>
+            </p>
+            <p>2.距离订单归来后
+                <select style="width: 8%" name="time_point_after" id="time_point_after" required="true">
+                    <option value="3">3天</option>
+                    <option value="4">4天</option>
+                    <option value="5" selected="selected">5天</option>
+                </select>
+            </p>
+        </div>
+        <br/>
+        <div>
+            <div class="form-group">
+                <div class="col-sm-8 col-sm-offset-3">
+                    <button id="cancel_button" class="btn btn-primary" type="reset" style="float:left;margin-left: 260px;background: #f95d5d;border-color: #f95d5d;width: 82px">取消</button>
+                    <span></span>
+                    <button id="save_button" class="btn btn-primary" type="submit" onclick="" style="float:left;background: #f95d5d;border-color: #f95d5d;margin-left: 60px">保存设置</button>
+                </div>
+            </div>
+        </div>
+        <div>
+            <input  id="destination_id" type="hidden" name="destination_id"/>
+            <input  id="contactListOverHigh" name="contactListOverHigh" type="hidden" class="chec"/>
+            <input  id="contactListAbnormal" name="contactListAbnormal" type="hidden" class="chec"/>
+        </div>
+        <div class="form-group Alert" id="AlertOverHigh" style="overflow: auto;height: 540px">
+            <div>
+                <ul id="cityTreeOverHigh" class="ztree ztree2"></ul>
+                <div class="confir_cancle">
+                    <span class="confir" id="confirOverHigh">确认</span>
+                    <span class="cancle" id="cancleOverHigh">取消</span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group Alert" id="AlertAbnormal" style="overflow: auto;height: 540px">
+            <div>
+                <ul id="cityTreeAbnormal" class="ztree ztree2"></ul>
+                <div class="confir_cancle">
+                    <span class="confir" id="confirAbnormal">确认</span>
+                    <span class="cancle" id="cancleAbnormal">取消</span>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script th:src="@{/js/popper.js}"></script>
+<script th:src="@{/js/jquery-3.2.1.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/bootstrap-multiselect.js}"></script>
+<script th:src="@{/js/content.min.js}"></script>
+<script th:src="@{/js/page.js}"></script>
+<script th:src="@{/js/layer.js}"></script>
+<script th:src="@{/js/alert-config.js}"></script>
+<script th:src="@{/js/jquery.ztree.core.js}"></script>
+<script th:src="@{/js/jquery.ztree.excheck.js}"></script>
+<script th:src="@{/js/department-tree-mem.js}"></script>
+</body>
+<footer th:replace="fragments/footer :: footer"></footer>
+</html>

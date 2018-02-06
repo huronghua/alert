@@ -1,0 +1,82 @@
+server:
+  port: 9011
+
+spring:
+  datasource:
+      url: jdbc:mysql://106.14.39.22:3306/banma_dev?useUnicode=true&characterEncoding=utf8&tinyInt1isBit=false&zeroDateTimeBehavior=convertToNull&useSSL=true
+      username: banmatest
+      password: 123456
+      driver-class-name: com.mysql.jdbc.Driver
+  application:
+    name: alert
+
+#mybatis配置
+mybatis:
+  typeAliasesPackage: com.banmatrip.alert.domain
+  mapperLocations: classpath*:mapper/*.xml
+  configuration.log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  configuration.call-setters-on-nulls: true
+
+orange:
+  login:
+    url: http://centertest.banma_cefu.com:8080?c=query&a=query
+  singout:
+    url: http://centertest.banma_cefu.com:8080?c=check&a=logout
+  system:
+    uuid: bm10004
+
+oauthserver:
+    getResource:
+      function:
+        url: http://172.16.1.14:8092/permission/function
+      dataFunction:
+        url: http://172.16.1.14:8092/permission/data
+      userinfo:
+        url: http://172.16.1.14:8092/user
+
+
+#oauth客户端配置
+security:
+  ignored: /favicon.ico,/scripts/**,/styles/**,/images/**
+  sessions: always
+  oauth2:
+    sso:
+      login-path: /login
+    client:
+      client-id: ssoclient
+      client-secret: ssosecret
+      access-token-uri: http://172.16.1.14:8091/oauth/token
+      user-authorization-uri: http://172.16.1.14:8091/oauth/authorize
+      client-authentication-scheme: form
+    resource:
+      jwt:
+        key-uri: http://172.16.1.14:8091/oauth/token_key
+
+#登出配置
+sso:
+  tosignout:
+    url: http://172.16.1.14:8091/signout
+
+#RestTemplate配置
+client:
+  filemanager:
+     root:
+        uri: http://172.16.1.22:8097
+     connect:
+        timeout: 5000
+     read:
+        timeout: 5000
+  alert:
+     root:
+        uri: http://localhost:8191
+     connect:
+        timeout: 5000
+     read:
+        timeout: 5000
+  report:
+     root:
+        uri: http://172.16.1.22:9001
+     connect:
+        timeout: 5000
+     read:
+        timeout: 5000

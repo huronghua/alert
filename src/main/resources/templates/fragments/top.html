@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+   <top th:fragment="top">
+       <div class="navbar navbar-inverse navbar-fixed-top">
+           <div class="navbar-inner">
+               <div  class="container">
+                   <a class="brand" href="/home"> &nbsp;Alert&nbsp; </a>
+                   <div class="nav-collapse collapse">
+                       <ul class="nav">
+                           <li class="dropdown">
+                               <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                   预警配置<b class="caret"></b>
+                               </a>
+                               <ul class="dropdown-menu">
+                               <li th:if="${session.alertFunction.get('alertdestinationconfigview')}">
+                                   <a th:href="@{/alertConfig}">目的地预警配置</a>
+                               </li>
+                               </ul>
+                           </li>
+                           <!--<li class="dropdown">
+                               <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                   预警消息<b class="caret"></b>
+                               </a>
+                               <ul class="dropdown-menu">
+                                    <li>
+                                        <a th:href="@{/alertMessage}">预警消息列表</a>
+                                    </li>
+                                </ul>
+                           </li>-->
+                       </ul>
+                       <div class="btn-group pull-right">
+                           <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                               <i class="icon-user"></i><span class="hidden-phone" th:text="${session.userName}"> 斑马</span>
+                               <span class="caret"></span>
+                           </a>
+                           <ul class="dropdown-menu">
+                               <li><a th:href="@{/tosignout}">登出</a></li>
+                           </ul>
+                       </div>
+                   </div>
+               </div>
+           </div>
+       </div>
+   </top>
+</body>
+</html>
+<script type="text/javascript">
+    jQuery(function () {
+        jQuery('.dropdown-toggle').dropdown();
+    });
+    $(document).ready(function () {
+        if($(".dropdown-menu").children.length==0){
+            $(".dropdown-menu").parent().hide();
+        }
+    });
+</script>

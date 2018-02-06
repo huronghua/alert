@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="../static/js/easyui-lang-zh_CN.js"></script>
+</head>
+<link rel="stylesheet" th:href="@{/css/bootstrap.css}" />
+<link rel="stylesheet" th:href="@{/css/app.css}" />
+<link rel="stylesheet" th:href="@{/css/bootstrap-multiselect.css}"  />
+<link rel="stylesheet" th:href="@{/css/bootstrap-responsive.css}" />
+<link rel="stylesheet" th:href="@{/css/layer.css}" />
+<link rel="stylesheet" th:href="@{/css/ui-lightness/jquery-ui-1.10.4.custom.min.css}" />
+<link rel="stylesheet" th:href="@{/css/icon.css}" />
+<link rel="stylesheet" th:href="@{/css/color.css}" />
+<link rel="stylesheet" th:href="@{/css/easyui.css}" />
+<style>
+    .row_new {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 32px;
+        height:32px;
+        background: url("../img/new.svg") no-repeat;
+    }
+
+    tr.datagrid-row td {
+        position: relative;
+    }
+    .btn[disabled] {
+        cursor: not-allowed;
+    }
+</style>
+<body>
+<table class="table" >
+    <tbody>
+    <tr>
+        <h1 style="border-left: 10px solid #ccc;padding-left: 10px;">预警提醒</h1>
+    </tr>
+    <form th:action="@{/order/downloadAlertOrderDetail}" method="get" id="downloadDetail">
+    <tr>
+        <td width="30%"><span>待处理预警订单:</span> <span id="unHandleInfo" style="color: #ff0000;"></span></td>
+            <td width="30%">
+                <input type="checkbox" id="operating_status" name="operating_status" value="false"/>仅显示待处理订单
+                <input type="hidden" name="userId" id="userId" th:value="${userId}" />
+            </td>
+
+        <td width="30">
+            <input type="button" class="download btn btn-primary" id="download" name="download" value="导出Excel数据"/>
+        </td>
+    </tr>
+    </form>
+    </tbody>
+</table>
+<table id="alertDetailGrid">
+
+</table>
+</body>
+<script th:src="@{/js/moment.js}"></script>
+<script th:src="@{/js/popper.js}"></script>
+<script th:src="@{/js/jquery-3.2.1.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/bootstrap-multiselect.js}"></script>
+<script th:src="@{/js/content.min.js}"></script>
+<script th:src="@{/js/page.js}"></script>
+<script th:src="@{/js/layer.js}"></script>
+<script th:src="@{/js/department-tree-mem.js}"></script>
+<script th:src="@{/js/jquery.easyui.min.js}"></script>
+<script th:src="@{/js/jquery.datagrid.js}"></script>
+<script th:src="@{/js/jquery.pagination.js}"></script>
+<script th:src="@{/js/easyui-lang-zh_CN.js}"></script>
+<script th:src="@{/js/alert-detail.js}"></script>
+</html>

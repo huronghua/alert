@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<script type="text/javascript" th:inline="javascript">
+    var href =/*[[${ssoTosignoutUrl}]]*/;
+    function to_sso(){
+        location.href = href ;
+    }
+</script>
+<body onload="to_sso()">
+</body>
+</html>

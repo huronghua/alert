@@ -1,0 +1,48 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/banma_dev
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+
+#mybatis配置
+mybatis:
+  typeAliasesPackage: com.banmatrip.alert.domain
+  mapperLocations: classpath*:mapper/*.xml
+  configuration.log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  configuration.call-setters-on-nulls: true
+
+#oauth客户端配置
+security:
+  ignored: /favicon.ico,/scripts/**,/styles/**,/images/**
+  sessions: always
+  oauth2:
+    sso:
+      login-path: /login
+    client:
+      client-id: ssoclient
+      client-secret: ssosecret
+      access-token-uri: http://localhost:8091/oauth/token
+      user-authorization-uri: http://localhost:8091/oauth/authorize
+      client-authentication-scheme: form
+    resource:
+      jwt:
+        key-uri: http://localhost:8091/oauth/token_key
+
+#登出配置
+sso:
+  tosignout:
+    url: http://localhost:8091/signout
+
+oauthserver:
+    getResource:
+      function:
+        url: http://localhost:8092/permission/function
+      dataFunction:
+        url: http://localhost:8092/permission/data
+      userinfo:
+        url: http://localhost:8092/user
+

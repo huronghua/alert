@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.banmatrip.alert.dao.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.banmatrip.alert.domain.User" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <id column="account" property="account" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="department_id" property="departmentId" jdbcType="INTEGER" />
+    <result column="cellphone" property="cellphone" jdbcType="VARCHAR" />
+    <result column="employee_id" property="employeeId" jdbcType="VARCHAR" />
+    <result column="ethnic" property="ethnic" jdbcType="VARCHAR" />
+    <result column="position_id" property="positionId" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="create_id" property="createId" jdbcType="INTEGER" />
+    <result column="update_id" property="updateId" jdbcType="INTEGER" />
+    <result column="role_type" property="roleType" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id,account,name, password, email, department_id, cellphone, employee_id, ethnic,
+    position_id, create_time, update_time, create_id, update_id,role_type
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from sso_user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAllUser" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sso_user
+    where 1=1
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sso_user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.banmatrip.alert.domain.User" >
+    insert into sso_user (id,account,name, password,
+    email, department_id, cellphone,
+    employee_id, ethnic, position_id,
+    create_time, update_time, create_id,
+    update_id,role_type)
+    values (#{id,jdbcType=INTEGER},#{account,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+    #{email,jdbcType=VARCHAR}, #{departmentId,jdbcType=INTEGER}, #{cellphone,jdbcType=VARCHAR},
+    #{employeeId,jdbcType=VARCHAR}, #{ethnic,jdbcType=VARCHAR}, #{positionId,jdbcType=VARCHAR},
+    #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{createId,jdbcType=INTEGER},
+    #{updateId,jdbcType=INTEGER},#{roleType,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.banmatrip.alert.domain.User" >
+    insert into sso_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="account != null" >
+        account,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="departmentId != null" >
+        department_id,
+      </if>
+      <if test="cellphone != null" >
+        cellphone,
+      </if>
+      <if test="employeeId != null" >
+        employee_id,
+      </if>
+      <if test="ethnic != null" >
+        ethnic,
+      </if>
+      <if test="positionId != null" >
+        position_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="createId != null" >
+        create_id,
+      </if>
+      <if test="updateId != null" >
+        update_id,
+      </if>
+      <if test="roleType != null" >
+        role_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="account != null" >
+        #{account,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentId != null" >
+        #{departmentId,jdbcType=INTEGER},
+      </if>
+      <if test="cellphone != null" >
+        #{cellphone,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeId != null" >
+        #{employeeId,jdbcType=VARCHAR},
+      </if>
+      <if test="ethnic != null" >
+        #{ethnic,jdbcType=VARCHAR},
+      </if>
+      <if test="positionId != null" >
+        #{positionId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createId != null" >
+        #{createId,jdbcType=INTEGER},
+      </if>
+      <if test="updateId != null" >
+        #{updateId,jdbcType=INTEGER},
+      </if>
+      <if test="roleType != null" >
+        #{roleType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.banmatrip.alert.domain.User" >
+    update sso_user
+    <set >
+      <if test="account != null" >
+        account = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentId != null" >
+        department_id = #{departmentId,jdbcType=INTEGER},
+      </if>
+      <if test="cellphone != null" >
+        cellphone = #{cellphone,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeId != null" >
+        employee_id = #{employeeId,jdbcType=VARCHAR},
+      </if>
+      <if test="ethnic != null" >
+        ethnic = #{ethnic,jdbcType=VARCHAR},
+      </if>
+      <if test="positionId != null" >
+        position_id = #{positionId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createId != null" >
+        create_id = #{createId,jdbcType=INTEGER},
+      </if>
+      <if test="updateId != null" >
+        update_id = #{updateId,jdbcType=INTEGER},
+      </if>
+      <if test="roleType != null" >
+        role_type = #{roleType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.banmatrip.alert.domain.User" >
+    update sso_user
+    set account = #{account,jdbcType=VARCHAR},
+    name = #{name,jdbcType=VARCHAR},
+    password = #{password,jdbcType=VARCHAR},
+    email = #{email,jdbcType=VARCHAR},
+    department_id = #{departmentId,jdbcType=INTEGER},
+    cellphone = #{cellphone,jdbcType=VARCHAR},
+    employee_id = #{employeeId,jdbcType=VARCHAR},
+    ethnic = #{ethnic,jdbcType=VARCHAR},
+    position_id = #{positionId,jdbcType=VARCHAR},
+    create_time = #{createTime,jdbcType=TIMESTAMP},
+    update_time = #{updateTime,jdbcType=TIMESTAMP},
+    create_id = #{createId,jdbcType=INTEGER},
+    update_id = #{updateId,jdbcType=INTEGER},
+    role_type = #{roleType,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="getPeopleCount" resultType="java.lang.Integer">
+    select count(*) from sso_user a left join (select * from sso_department_group WHERE
+    delete_flag = 0) b on a.department_id=b.id where b.department_id in
+    <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+      #{item.id}
+    </foreach>
+  </select>
+
+  <select id="selectDepUser" resultType="java.util.HashMap" >
+    SELECT
+    a.id + 10000 AS id,
+    b.department_id AS pId,
+    a.`name` AS name,
+    a.`name` AS onlyName
+    FROM
+    sso_user a
+    LEFT JOIN sso_department_group b ON a.department_id = b.id
+    LEFT JOIN sso_department c ON c.id = b.department_id
+  </select>
+
+  <select id="selectDepParId" resultType="java.lang.Integer" >
+   SELECT parent_id FROM sso_department
+  </select>
+
+  <select id="selectEchoUserId" resultType="java.lang.Long" >
+    SELECT
+    notify_user_id
+    FROM
+    alert_notify
+    WHERE config_id =#{config_id}
+  </select>
+</mapper>

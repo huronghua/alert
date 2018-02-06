@@ -1,0 +1,97 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+li{
+    list-style: none;
+}
+.second{
+    display: none;
+}
+.sec{
+    width: 300px;
+    height: 50px;
+    font-size: 20px;
+    text-align: left;
+    line-height: 50px;
+    cursor: pointer;
+    margin-left: 20px;
+    position: relative;
+}
+
+.third{
+    display: none;
+}
+.third li{
+    width: 270px;
+    height: 50px;
+    font-size: 16px;
+    text-align: left;
+    line-height: 50px;
+    cursor: pointer;
+    margin-left: 40px;
+    position: relative;
+}
+.third li input{
+    position: absolute;
+    top: 18px;
+    right: 0;
+}
+.a{
+    display: block;
+}
+.dis{
+    width: 300px;
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #666;
+    cursor: pointer;
+}
+.menu{
+    width: 350px;
+    height: 50px;
+    color: #000;
+    font-size: 20px;
+    text-align: left;
+    line-height: 50px;
+    cursor: pointer;
+    font-weight: normal;
+}
+.icon-daosanjiao{
+    margin-right: 20px;
+    color: grey;
+    font-size: 20px;
+}
+.sec input{
+    position: absolute;
+    top: 18px;
+    right: 0;
+}
+.menu_box input{
+    cursor: pointer;
+}
+.trans{
+    transform: rotate(-90deg);
+}
+.second .trans{
+    display: inline-block;
+    position: relative;
+    top: -10px;
+}
+.bot{
+    width: 440px;
+    position: relative;
+    display: none;
+}
+.hide{
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+    background: orange;
+    cursor: pointer;
+    position: absolute;
+    top: 14px;
+    right: 30px;
+}

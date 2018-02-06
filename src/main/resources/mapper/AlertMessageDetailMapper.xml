@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.banmatrip.alert.dao.AlertMessageDetailMapper">
+	<resultMap id="BaseResultMap" type="com.banmatrip.alert.domain.AlertMessageDetail" >
+		<id column="message_id" property="messageId" jdbcType="INTEGER" />
+		<result column="order_id" property="orderId" jdbcType="INTEGER" />
+		<result column="alert_time" property="alertTime" jdbcType="TIMESTAMP" />
+		<result column="departure_date" property="departureDate" jdbcType="TIMESTAMP" />
+		<result column="return_date" property="returnDate" jdbcType="TIMESTAMP" />
+		<result column="estimate_cost" property="estimateCost" jdbcType="DECIMAL" />
+		<result column="dynamic_cost" property="dynamicCost" jdbcType="DECIMAL" />
+		<result column="cost_difference" property="costDifference" jdbcType="DECIMAL" />
+		<result column="cost_difference_rate" property="costDifferenceRate" jdbcType="VARCHAR" />
+		<result column="difference_reason" property="differenceReason" jdbcType="CHAR" />
+		<result column="operating_status" property="operatingStatus" jdbcType="CHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<resultMap id="AlertOrderDetailResultMap" type="com.banmatrip.alert.dto.AlertMessageDetailDto" >
+		<id column="message_id" property="messageId" jdbcType="INTEGER" />
+		<result column="order_id" property="orderId" jdbcType="INTEGER" />
+		<result column="alert_time" property="alertTime" jdbcType="TIMESTAMP" />
+		<result column="departure_date" property="departureDate" jdbcType="TIMESTAMP" />
+		<result column="return_date" property="returnDate" jdbcType="TIMESTAMP" />
+		<result column="estimate_cost" property="estimateCost" jdbcType="DECIMAL" />
+		<result column="dynamic_cost" property="dynamicCost" jdbcType="DECIMAL" />
+		<result column="cost_difference" property="costDifference" jdbcType="DECIMAL" />
+		<result column="cost_difference_rate" property="costDifferenceRate" jdbcType="VARCHAR" />
+		<result column="difference_reason" property="differenceReason" jdbcType="CHAR" />
+		<result column="operating_status" property="operatingStatus" jdbcType="CHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+		<result column="message_status" property="messageStatus" jdbcType="CHAR" />
+	</resultMap>
+	<sql id="Base_Column_List" >
+		message_id, order_id, alert_time, departure_date, return_date, estimate_cost, dynamic_cost,
+		cost_difference, cost_difference_rate, difference_reason, operating_status, create_time,
+		update_time
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+		select
+		<include refid="Base_Column_List" />
+		from alert_message_detail
+		where message_id = #{messageId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+		delete from alert_message_detail
+		where message_id = #{messageId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.banmatrip.alert.domain.AlertMessageDetail" >
+		insert into alert_message_detail (message_id, order_id, alert_time,
+		departure_date, return_date, estimate_cost,
+		dynamic_cost, cost_difference, cost_difference_rate,
+		difference_reason, operating_status, create_time,
+		update_time)
+		values (#{messageId,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, #{alertTime,jdbcType=TIMESTAMP},
+		#{departureDate,jdbcType=TIMESTAMP}, #{returnDate,jdbcType=TIMESTAMP}, #{estimateCost,jdbcType=DECIMAL},
+		#{dynamicCost,jdbcType=DECIMAL}, #{costDifference,jdbcType=DECIMAL}, #{costDifferenceRate,jdbcType=VARCHAR},
+		#{differenceReason,jdbcType=CHAR}, #{operatingStatus,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP},
+		#{updateTime,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.banmatrip.alert.domain.AlertMessageDetail" >
+		insert into alert_message_detail
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="messageId != null" >
+				message_id,
+			</if>
+			<if test="orderId != null" >
+				order_id,
+			</if>
+			<if test="alertTime != null" >
+				alert_time,
+			</if>
+			<if test="departureDate != null" >
+				departure_date,
+			</if>
+			<if test="returnDate != null" >
+				return_date,
+			</if>
+			<if test="estimateCost != null" >
+				estimate_cost,
+			</if>
+			<if test="dynamicCost != null" >
+				dynamic_cost,
+			</if>
+			<if test="costDifference != null" >
+				cost_difference,
+			</if>
+			<if test="costDifferenceRate != null" >
+				cost_difference_rate,
+			</if>
+			<if test="differenceReason != null" >
+				difference_reason,
+			</if>
+			<if test="operatingStatus != null" >
+				operating_status,
+			</if>
+			<if test="createTime != null" >
+				create_time,
+			</if>
+			<if test="updateTime != null" >
+				update_time,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="messageId != null" >
+				#{messageId,jdbcType=INTEGER},
+			</if>
+			<if test="orderId != null" >
+				#{orderId,jdbcType=INTEGER},
+			</if>
+			<if test="alertTime != null" >
+				#{alertTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="departureDate != null" >
+				#{departureDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="returnDate != null" >
+				#{returnDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="estimateCost != null" >
+				#{estimateCost,jdbcType=DECIMAL},
+			</if>
+			<if test="dynamicCost != null" >
+				#{dynamicCost,jdbcType=DECIMAL},
+			</if>
+			<if test="costDifference != null" >
+				#{costDifference,jdbcType=DECIMAL},
+			</if>
+			<if test="costDifferenceRate != null" >
+				#{costDifferenceRate,jdbcType=VARCHAR},
+			</if>
+			<if test="differenceReason != null" >
+				#{differenceReason,jdbcType=CHAR},
+			</if>
+			<if test="operatingStatus != null" >
+				#{operatingStatus,jdbcType=CHAR},
+			</if>
+			<if test="createTime != null" >
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null" >
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.banmatrip.alert.domain.AlertMessageDetail" >
+		update alert_message_detail
+		<set >
+			<if test="orderId != null" >
+				order_id = #{orderId,jdbcType=INTEGER},
+			</if>
+			<if test="alertTime != null" >
+				alert_time = #{alertTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="departureDate != null" >
+				departure_date = #{departureDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="returnDate != null" >
+				return_date = #{returnDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="estimateCost != null" >
+				estimate_cost = #{estimateCost,jdbcType=DECIMAL},
+			</if>
+			<if test="dynamicCost != null" >
+				dynamic_cost = #{dynamicCost,jdbcType=DECIMAL},
+			</if>
+			<if test="costDifference != null" >
+				cost_difference = #{costDifference,jdbcType=DECIMAL},
+			</if>
+			<if test="costDifferenceRate != null" >
+				cost_difference_rate = #{costDifferenceRate,jdbcType=VARCHAR},
+			</if>
+			<if test="differenceReason != null" >
+				difference_reason = #{differenceReason,jdbcType=CHAR},
+			</if>
+			<if test="operatingStatus != null" >
+				operating_status = #{operatingStatus,jdbcType=CHAR},
+			</if>
+			<if test="createTime != null" >
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null" >
+				update_time = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where message_id = #{messageId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.banmatrip.alert.domain.AlertMessageDetail" >
+    update alert_message_detail
+    set order_id = #{orderId,jdbcType=INTEGER},
+      alert_time = #{alertTime,jdbcType=TIMESTAMP},
+      departure_date = #{departureDate,jdbcType=TIMESTAMP},
+      return_date = #{returnDate,jdbcType=TIMESTAMP},
+      estimate_cost = #{estimateCost,jdbcType=DECIMAL},
+      dynamic_cost = #{dynamicCost,jdbcType=DECIMAL},
+      cost_difference = #{costDifference,jdbcType=DECIMAL},
+      cost_difference_rate = #{costDifferenceRate,jdbcType=VARCHAR},
+      difference_reason = #{differenceReason,jdbcType=CHAR},
+      operating_status = #{operatingStatus,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where message_id = #{messageId,jdbcType=INTEGER}
+  </update>
+
+	<select id="getBeforeLeaveOrderInfo" resultType="com.banmatrip.alert.domain.AlertTriggerConfig">
+    SELECT
+        a.id AS 'orderId',
+        c.id AS 'destinationId',
+        a.total_cost AS 'dynamicCost',
+        a.total_budget_cost AS 'estimateCost'
+    FROM
+        (
+            SELECT
+                *
+            FROM
+                `order`
+            WHERE
+                delete_flag = 0
+        ) a
+    LEFT JOIN order_customize b ON a.id = b.order_id
+    LEFT JOIN (
+        SELECT
+            *
+        FROM
+            tag
+        WHERE
+            delete_flag = 0
+        AND group_id = 2
+    ) c ON b.destination = c.id
+    LEFT JOIN (
+    SELECT
+        destination_id,
+        config_value
+    FROM
+        `alert_config`
+    WHERE
+        config_type = 4
+    AND
+        `level` = 1
+    ) d ON d.destination_id = c.id
+    WHERE
+    DATE_FORMAT(DATE_ADD(NOW(), INTERVAL (d.config_value - 1) DAY),'%Y-%m-%d') = DATE_FORMAT(b.date,'%Y-%m-%d')
+  </select>
+
+	<select id="getAfterBackOrderInfo" resultType="com.banmatrip.alert.domain.AlertTriggerConfig">
+    SELECT
+        a.id AS 'orderId',
+        c.id AS 'destinationId',
+        a.total_cost AS 'dynamicCost',
+        a.total_budget_cost AS 'estimateCost'
+    FROM
+        (
+            SELECT
+                *
+            FROM
+                `order`
+            WHERE
+                delete_flag = 0
+        ) a
+    LEFT JOIN order_customize b ON a.id = b.order_id
+    LEFT JOIN (
+        SELECT
+            *
+        FROM
+            tag
+        WHERE
+            delete_flag = 0
+        AND group_id = 2
+    ) c ON b.destination = c.id
+    LEFT JOIN (
+    SELECT
+        destination_id,
+        config_value
+    FROM
+        `alert_config`
+    WHERE
+        config_type = 4
+    AND
+        `level` = 2
+    ) d ON d.destination_id = c.id
+    WHERE
+    DATE_FORMAT(DATE_ADD(DATE_ADD(b.date, INTERVAL (b.days-1) DAY),INTERVAL (d.config_value-1) DAY),'%Y-%m-%d') = DATE_FORMAT(NOW(),'%Y-%m-%d')
+  </select>
+
+	<select id="selectOrderBasicInfoById" resultType="com.banmatrip.alert.dto.OrderBasicInfoVO">
+	SELECT
+	a.id AS 'orderId',
+	b.date AS 'departureDate',
+	DATE_ADD(
+		b.date,
+		INTERVAL (b.days - 1) DAY
+	) AS 'returnDate',
+	a.admin_id_pm AS 'pmId',
+	a.total_cost AS 'dynamicCost',
+	a.total_budget_cost AS 'estimateCost',
+	a.total_cost - a.total_budget_cost AS 'costDifference',
+	ROUND(
+		(
+			(
+				a.total_cost - a.total_budget_cost
+			) / a.total_budget_cost
+		),
+		4
+	)*100 AS 'costDifferenceRate'
+	FROM
+	(
+		SELECT
+			*
+		FROM
+			`order`
+		WHERE
+			delete_flag = 0
+	) a
+	LEFT JOIN order_customize b ON a.id = b.order_id
+	WHERE
+	  a.id = #{orderId}
+	</select>
+
+	<insert id="insertByList" parameterType="java.util.List">
+		insert into alert_message_detail (order_id,message_id,alert_time, departure_date,
+		return_date, estimate_cost, dynamic_cost,
+		cost_difference, cost_difference_rate, difference_reason,
+		operating_status,create_time,
+		update_time)
+		values
+		<foreach collection="alertMessageDetailList" item="item" index="index" separator=",">
+			(#{item.orderId},#{item.messageId},#{item.alertTime},#{item.departureDate},#{item.returnDate},#{item.estimateCost},#{item.dynamicCost},
+			#{item.costDifference},#{item.costDifferenceRate},#{item.differenceReason},#{item.operatingStatus},#{item.createTime},#{item.updateTime})
+		</foreach>
+	</insert>
+<!--获取预警订单详情展示-->
+	<select id="getAlertOrderDetailInfo" parameterType="java.util.Map" resultMap="AlertOrderDetailResultMap">
+		SELECT
+			b.*,
+			a.message_status
+		FROM
+			(
+				SELECT
+					*
+				FROM
+					alert_message
+				WHERE
+					receive_id = #{queryParam.userId}
+			) a
+		LEFT JOIN `alert_message_detail` b ON a.message_id = b.message_id
+		<if test="queryParam.operatingStatus">
+		WHERE
+		b.operating_status = 1
+		</if>
+		<choose>
+			<when test="queryParam.sort == 'departureDate'">
+				ORDER BY
+				b.departure_date
+				<if test="queryParam.order == 'desc'">
+					DESC
+				</if>
+			</when>
+			<when test="queryParam.sort == 'returnDate'">
+				ORDER BY
+				b.return_date
+				<if test="queryParam.order == 'desc'">
+					DESC
+				</if>
+			</when>
+			<when test="queryParam.sort == 'costDifference'">
+				ORDER BY
+				b.cost_difference
+				<if test="queryParam.order == 'desc'">
+					DESC
+				</if>
+			</when>
+			<when test="queryParam.sort == 'costDifferenceRate'">
+				ORDER BY
+				b.cost_difference_rate
+				<if test="queryParam.order == 'desc'">
+					DESC
+				</if>
+			</when>
+			<otherwise>
+				ORDER BY
+				b.departure_date
+			</otherwise>
+		</choose>
+		limit #{queryParam.startindex},#{queryParam.pagesize}
+	</select>
+<!--下载预警订单详情-->
+	<select id="downloadAlertOrderDetailInfo" parameterType="java.util.Map" resultType="java.util.LinkedHashMap">
+		SELECT
+		CONCAT('YQH', b.order_id + 200) AS order_id,
+		date_format(b.alert_time,'%Y-%m-%d') AS alert_time,
+		date_format(b.departure_date,'%Y-%m-%d') AS departure_date,
+		date_format(b.return_date,'%Y-%m-%d') AS return_date,
+		b.estimate_cost,
+		b.dynamic_cost,
+		b.cost_difference,
+		CONCAT(b.cost_difference_rate,'%') AS cost_difference_rate,
+		CASE
+		b.difference_reason
+		WHEN 1 THEN '拼单成本合并'
+		WHEN 2 THEN	'重复录入成本'
+		WHEN 3 THEN	'手抖录错'
+		WHEN 4 THEN	'币种未转换'
+		WHEN 5 THEN	'录入不及时'
+		WHEN 6 THEN '非正常额外资源添加'
+		WHEN 7 THEN '其他原因'
+		WHEN 8 THEN '合理变动（退增资源）'
+		ELSE '未选择原因'
+		END AS difference_reason,
+		CASE
+		b.operating_status
+		WHEN 1 THEN '待处理'
+		WHEN 2 THEN '处理完成'
+		END AS operating_status
+		FROM
+		(
+		SELECT
+		*
+		FROM
+		alert_message
+		WHERE
+		receive_id = #{queryParam.userId}
+		) a
+		LEFT JOIN `alert_message_detail` b ON a.message_id = b.message_id
+		<if test="queryParam.operatingStatus">
+			WHERE
+			b.operating_status = 1
+		</if>
+		ORDER BY
+		b.departure_date
+	</select>
+	
+	<select id="getAlertOrderDetailInfoCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+		SELECT
+			COUNT(*)
+		FROM
+		(SELECT
+		*
+		FROM
+		alert_message
+		WHERE
+		receive_id = #{queryParam.userId}
+		)a
+		LEFT JOIN `alert_message_detail` b ON a.message_id = b.message_id
+		<if test="queryParam.operatingStatus">
+			WHERE
+			b.operating_status = 1
+		</if>
+	</select>
+	
+	<update id="updateAlertOrderInfo" parameterType="java.util.Map">
+		UPDATE
+		alert_message_detail
+		SET
+		difference_reason = #{queryParam.differenceReason},
+		operating_status = #{queryParam.operatingStatus}
+		WHERE
+		order_id  = #{queryParam.orderId}
+		AND
+		DATE_FORMAT(alert_time,'%Y%m%d%H%i%s') = #{queryParam.alertTime}
+	</update>
+</mapper>
